@@ -1,0 +1,66 @@
+.btnz {
+    display: block;
+    float: left;
+    padding: 10px 15px;
+    border:none;
+    background-color: #ececec;
+    text-decoration: none;
+    font-size: 18px;
+    color: #FFF;
+}
+.btnz:hover {
+    color: #FFF;
+}
+.btnz:active {
+    color: #FFF;
+}
+.btnz:focus {
+    color: #FFF;
+}
+.facebook {
+    background-color: #3b5998;
+}
+.gplus {
+    background-color: #dd4b39;
+}
+.twitter {
+    background-color: #55acee;
+}
+.reddit {
+    background-color: #eb4924;
+}
+.linkedin {
+    background-color: #0077b5;
+}
+.inde {
+    text-indent: 10px;
+    margin-top: 5px;
+    padding-top: 5px;
+}
+.gist {
+    width:auto !important;
+}
+.gist-file
+.gist-data {
+    max-height: 400px;
+    max-width: auto;
+}
+.hljs-line-numbers {
+    text-align: right;
+    border-right: 1px solid #ccc;
+    color: #999;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+pre {
+    overflow: auto;
+    word-break: normal;
+    word-wrap: normal;
+}
+pre code {
+    white-space: pre;
+}

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+{% block content %}
+<script language="JavaScript">
+slugify = function(text) {
+    var trMap = {
+        'çÇ':'c',
+        'ğĞ':'g',
+        'şŞ':'s',
+        'üÜ':'u',
+        'ıİ':'i',
+        'öÖ':'o',
+        ' ':'-'
+    };
+    for(var key in trMap) {
+        text = text.replace(new RegExp('['+key+']','g'), trMap[key]);
+    }
+    return  text.replace(/[^-a-zA-Z0-9\s]+/ig, '') // remove non-alphanumeric chars
+                .replace(/\s/gi, "-") // convert spaces to dashes
+                .replace(/[-]+/gi, "-") // trim repeated dashes
+                .toLowerCase();
+
+}
+function GetTitleValue () {
+    var title = document.getElementById ("id_title");
+    return (title.value);
+}
+function SetSlugValue () {
+    var slug = document.getElementById ("id_slug");
+    slug.value = slugify(GetTitleValue());
+}
+</script>
+
+<div class="col-md-12">
+    <div class="row">
+
+    <h1>Form!</h1>
+    <form method="POST" action="" enctype="multipart/form-data" role="form">
+        <div class="container">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="panel panel panel-primary">
+                        <div class="panel-heading">İçerik Ayarları</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                {% csrf_token %}
+                                <label for="id_title">Title</label>
+                                <p>{{ form.title }}</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_slug"><a onclick="SetSlugValue();" role="button">Slug URL!</a></label>
+                                <p>{{ form.slug }}</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_category">Category!</label>
+                                <p>{{ form.category }}</p>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_keywords">Keywords!</label>
+                                <p>{{ form.keywords }}</p>
+                            </div>
+                            <div class="form-group">
+                                {{ form.image }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6 pull-left">
+                        <div class="panel panel panel-default">
+                            <div class="panel-heading">Meta Açıklaması</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="id_meta_desc">Meta Description!</label>
+                                    <p>{{ form.meta_desc }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pull-left">
+                        <div class="panel panel panel-success">
+                            <div class="panel-heading">Özet Açıklaması</div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="id_content_desc">Content Description!</label>
+                                    <p>{{ form.content_desc }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="panel panel panel-info">
+                        <div class="panel-heading">İçerik</div>
+                        <div class="panel-body">
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="id_content">Content!</label>
+                                    <p>{{ form.content }}</p>
+                                </div>
+                                <input type="submit" class="btn btn-default" value="Create Post!">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock content %}

@@ -1,0 +1,65 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="{{ instance.meta_desc }}">
+        <meta name="keywords" content="{{ instance.keywords }}" >
+        <title>{% block head_title %}Ali GÖREN{% endblock head_title %}</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+        <link rel="stylesheet" href='{% static "css/base.css" %}' media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href='{% static "css/synt/zenburn.css" %}' media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href='{% static "markdown/bootstrap_markdown.css" %}' media="screen" title="no title" charset="utf-8">
+        <style media="screen">
+            {% block style %}
+
+            {% endblock style %}
+        </style>
+    </head>
+    <body>
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="/">Anasayfa</a></li>
+              {% if user.is_authenticated %}
+                  {% if not request.path == "/" %}
+                    {% if not request.path == "/create/" and not '/edit/' in request.path %}
+                      <li><a href="{{ request.build_absolute_uri }}edit">Düzenle</a></li>
+                      <li><a href="{{ request.build_absolute_uri }}delete">Sil</a></li>
+                      <li><a href="/admin" target="_blank">Admin</a></li>
+                    {% else %}
+                       <li><a href="/admin" target="_blank">Admin</a></li>
+                    {% endif %}
+                  {% else %}
+                      <li><a href="{{ request.build_absolute_uri }}create">Yeni Yazı</a>
+                      </li><li><a href="/admin" target="_blank">Admin</a></li>
+                  {% endif %}
+              {% endif %}
+            </ul>
+          </div>
+        </nav>
+        <div class="container">
+            {% block content %}{% endblock content %}
+        </div>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script id="dsq-count-scr" src="//aligren.disqus.com/count.js" async></script>
+        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script type="text/javascript" src='{% static "markdown/bootstrap-markdown.js" %}'></script>
+        <script type="text/javascript" src='{% static "markdown/bootstrap-markdown.tr.js" %}'></script>
+        <script type="text/javascript" src='{% static "markdown/bootstrap.min.js" %}'></script>
+        <script type="text/javascript" src='{% static "markdown/markdown.js" %}'></script>
+        <script type="text/javascript" src='{% static "markdown/to-markdown.js" %}'></script>
+        <script src='{% static "js/high_line_num.js" %}' charset="utf-8"></script>
+        <script src='{% static "js/highlight.pack.js" %}' charset="utf-8"></script>
+        <script>hljs.initHighlightingOnLoad();</script>
+        <script>hljs.initLineNumbersOnLoad();</script>
+    </body>
+</html>
